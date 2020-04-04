@@ -2,6 +2,7 @@ package test;
 /**
  * classe pour tester Crypto2
  */
+import crypto.Cle;
 import crypto.Crypto;
 import crypto.Crypto2;
 
@@ -16,16 +17,16 @@ public class TestCrypto2 {
         String message ="Le dirigeant nord-coréen Kim Jong Un a pris mercredi matin le chemin de la Sibérie pour participer à son premier sommet avec le président russe Vladimir Poutine, a annoncé l'agence officielle nord-coréenne KCNA.";
         message ="Le dirigeant nord-coréen Kim Jong";
 
-        String ch1= "azi";
-        String ch2= "efc";
+        
+        Cle cle = new Cle("azi", "efc");
         String chiffre = null;
         String deChiffre = null;
 
 
         // TODO Crypto2 Test 1 : permutation simple
         System.out.println(" -- Test 1 ---");
-        chiffre = Crypto2.chiffrer(message, ch1,ch2);
-        deChiffre = Crypto2.dechiffrer(chiffre, ch1,ch2);
+        chiffre = Crypto2.chiffrer(message, cle);
+        deChiffre = Crypto2.dechiffrer(chiffre, cle);
 
         System.out.println(" message: 	"+ message);
         System.out.println(" chiffre: 	"+ chiffre);
@@ -36,11 +37,11 @@ public class TestCrypto2 {
                 +"\n Raison : la condition (deChiffre == message  et chiffre != message)est faux";
 
         System.out.println("Test 1 terminé avec succes");
-
-        // TODO Crypto Test 2 : ch1 == ch2
+        Cle cle1 = new Cle("efc", "efc");
+        // TODO Crypto Test 2 : 
         System.out.println(" -- Test 2 ---");
-        chiffre = Crypto2.chiffrer(message, ch1,ch1);
-        deChiffre = Crypto2.dechiffrer(chiffre, ch1 , ch1);
+        chiffre = Crypto2.chiffrer(message, cle1);
+        deChiffre = Crypto2.dechiffrer(chiffre, cle1);
 
         //chiffre ="La dirigaent nord-ioréan Kcm Jong";
         System.out.println(" message: 	"+ message);
@@ -54,10 +55,10 @@ public class TestCrypto2 {
         System.out.println("Test 2 terminé avec succes");
 
         // TODO Crypto Test 3 : permutation des clés
-
+        Cle cle2 = new Cle("efc", "azi");
         System.out.println(" -- Test 3 ---");
-        chiffre = Crypto2.chiffrer(message, ch1,ch2);
-        deChiffre = Crypto2.dechiffrer(chiffre, ch2 , ch1);
+        chiffre = Crypto2.chiffrer(message, cle);
+        deChiffre = Crypto2.dechiffrer(chiffre, cle2);
 
 
         chiffre ="La dirigaent nord-ioréan Kcm Jong";
@@ -91,14 +92,14 @@ public class TestCrypto2 {
         texte[4] ="Bien entendu, lorsque le nombre de lettres croît, le nombre d'arrangements augmente rapidement et il devient quasiment impossible de retrouver le texte original sans connaître le procédé de brouillage.";
 
         texte[5] ="Par exemple, les 27 lettres du message ci-contre, tiré du tome 17 de la série XIII, L'or de Maximilien (Ed. Dargaud), peuvent être disposées de 27! = 10'888'869'450'418'352'160'768'000'000 manières. Ce message est d'ailleurs surchiffré, puis qu'il est écrit dans une langue rare.";
-        String ch1= "abi";
-        String ch2= "efc";
+        
+        Cle cle3 = new Cle("abi", "efc");
         String chiffre = null;
         String deChiffre = null;
         long startTime = System.currentTimeMillis();
         for (String message : texte) {
-            chiffre = Crypto2.chiffrer(message, ch1,ch2);
-            deChiffre = Crypto2.dechiffrer(chiffre, ch1,ch2);
+            chiffre = Crypto2.chiffrer(message, cle3);
+            deChiffre = Crypto2.dechiffrer(chiffre, cle3);
         }
         long endTime = System.currentTimeMillis();
         System.out.println ( "temps pour le chiffement +déchiffremnt = "+ (endTime - startTime) +" ms");
