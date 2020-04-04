@@ -3,7 +3,7 @@ package test;
  * classe pour tester Crypto
  */
 import crypto.Crypto;
-
+import crypto.Cle;
 public class TestCrypto {
 
     public static void main(String[] args) {
@@ -13,17 +13,16 @@ public class TestCrypto {
         String messageVide = "";
         String chiffre = null;
         String deChiffre = null;
-        char car1 = 'o';
-        char car2 = 'z';
-        char car ='\u0000';
-
-        System.out.println(car);
+        Cle cle = new Cle("o", "z");
+        Cle cle1 = new Cle('\u0000','z')
+        Cle cle2 = new Cle("z", "o");
+        
 
         // TODO Crypto test 1 : permutation simple
-        chiffre = Crypto.chiffrer(message, 'o','z');
+        chiffre = Crypto.chiffrer(message, cle);
         System.out.println("chiffré="+chiffre);
 
-        deChiffre = Crypto.dechiffrer(chiffre, 'o','z');
+        deChiffre = Crypto.dechiffrer(chiffre, cle);
         System.out.println("déchiffré="+deChiffre);
 
         // verification des résultats
@@ -35,8 +34,8 @@ public class TestCrypto {
         System.out.println("Test 1 terminé avec succes");
 
         // TODO Crypto test 2 : car1 =null
-        chiffre = Crypto.chiffrer(message, car,car2);
-        deChiffre = Crypto.dechiffrer(chiffre, car , car2);
+        chiffre = Crypto.chiffrer(message, cle1);
+        deChiffre = Crypto.dechiffrer(chiffre, cle1);
 
         System.out.println("message =" +message +" chiffré =" +chiffre +" & deChiffre ="+deChiffre );
         System.out.println("chiffré="+chiffre);
@@ -49,9 +48,9 @@ public class TestCrypto {
 
         // TODO Crypto test 3 : permutation des clés
 
-        chiffre = Crypto.chiffrer(message, 'o','z');
+        chiffre = Crypto.chiffrer(message, cle);
         System.out.println(chiffre);
-        deChiffre = Crypto.dechiffrer(chiffre, 'z' , 'o');
+        deChiffre = Crypto.dechiffrer(chiffre, cle2);
         System.out.println(deChiffre);
         System.out.println("chiffré="+chiffre);
         System.out.println("déchiffré="+deChiffre);
@@ -65,10 +64,11 @@ public class TestCrypto {
 
         // TODO Crypto test 4 : clé de chiffrement != clé dechiffrement
         //						 ('b','z') 				('b','n')
-
-        chiffre = Crypto.chiffrer(message, 'b','n');
+        Cle cle3 = new Cle("b", "n");
+        Cle cle4 = new Cle("b", "z");
+        chiffre = Crypto.chiffrer(message, cle3);
         System.out.println(chiffre);
-        deChiffre = Crypto.dechiffrer(chiffre, 'b','z');
+        deChiffre = Crypto.dechiffrer(chiffre, cle4);
         System.out.println(deChiffre);
 
         // verification des résultats
