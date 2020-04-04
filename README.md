@@ -1,4 +1,4 @@
-# JawDri-Object-Oriented-Programming-Mini-Project-Introduction-to-cryptography-in-Java
+# Object-Oriented-Programming-Mini-Project-Introduction-to-cryptography-in-Java
 This repository contains my full documentation of my OOP Mini-Project
 
 We implemented a simple text encryption protocol that allows us to:
