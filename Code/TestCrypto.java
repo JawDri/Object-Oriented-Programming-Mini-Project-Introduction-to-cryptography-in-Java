@@ -33,7 +33,7 @@ public class TestCrypto {
 
         System.out.println("Test 1 terminé avec succes");
 
-        // TODO Crypto test 2 : car1 =null
+        // TODO Crypto test 2 : 
         chiffre = Crypto.chiffrer(message, cle1);
         deChiffre = Crypto.dechiffrer(chiffre, cle1);
 
